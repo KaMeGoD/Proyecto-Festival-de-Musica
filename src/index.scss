@@ -1,0 +1,9 @@
+/* base */
+@forward './scss/base/globales';
+@forward './scss/base/variables';
+@forward './scss/base/mixins';
+
+/* layout */
+@forward './scss//layout/header';
+@forward './scss//layout/video';
+@forward './scss//layout/sobreFestival';
