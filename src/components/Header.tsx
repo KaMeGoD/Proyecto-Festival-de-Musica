@@ -14,11 +14,10 @@ export const Header: React.FC = () => {
     function navegacionFija() {
       const barra = document.querySelector('header');
       const sobreFestival = document.querySelector('.sobre-festival');
-      const body = document.querySelector('body');
-      const bbd =  sobreFestival?.getBoundingClientRect().bottom 
+      const body = document.querySelector('body');   
 
       const handleScroll = () => {
-        if ( bbd < 0) {
+        if ( sobreFestival?.getBoundingClientRect().bottom < 0) {
           barra?.classList.add('fijo');
           body?.classList.add('body-scroll');
         } else {
