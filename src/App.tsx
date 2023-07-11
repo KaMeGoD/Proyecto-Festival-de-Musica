@@ -8,7 +8,6 @@ import { Galeria } from './components/Galeria'
 import { Boleteria } from './components/Boleteria'
 import { Footer } from './components/Footer'
 
-
 function App() {
 
   return (
