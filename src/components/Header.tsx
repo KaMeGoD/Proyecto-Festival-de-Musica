@@ -1,8 +1,8 @@
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Header = () => {
-  const navegacionFija = () => {
-    useEffect(() => {
+  useEffect(() => {
+    const navegacionFija = () => {
       const barra = document.querySelector('.header') as HTMLElement | null;
       const sobreFestival = document.querySelector('.sobre-festival') as HTMLElement | null;
       const body = document.querySelector('body') as HTMLElement | null;
@@ -22,33 +22,33 @@ const Header = () => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, []);
-  };
+    };
 
-  const scrollNav = () => {
-    const enlaces = document.querySelectorAll('.navegacion-principal');
-  
-    enlaces.forEach((enlace) => {
-      enlace.addEventListener('click', (e) => {
-        e.preventDefault();
-        const seccionScroll = (e.target as HTMLAnchorElement).getAttribute('href');
-        const seccion = document.querySelector(seccionScroll!);
-        seccion?.scrollIntoView({ behavior: 'smooth' });
+    const scrollNav = () => {
+      const enlaces = document.querySelectorAll('.navegacion-principal a');
+
+      enlaces.forEach((enlace) => {
+        enlace.addEventListener('click', (e) => {
+          e.preventDefault();
+          const seccionScroll = enlace.getAttribute('href');
+          const seccion = document.querySelector(seccionScroll!);
+          seccion?.scrollIntoView({ behavior: 'smooth' });
+        });
       });
-    });
-  };
-  
+    };
 
-  navegacionFija();
+    navegacionFija();
+    scrollNav();
+  }, []);
 
   return (
     <header className="header">
       <div className="contenedor contenido-header">
         <h1>Rock & EDM Festival</h1>
 
-        <nav onClick={scrollNav} className="navegacion-principal">
+        <nav className="navegacion-principal">
           <a href="#lineup">Line Up</a>
-          <a href="#galeria">GalerÃ­a</a>
+          <a href="#galeria">Galería</a>
           <a href="#boletos">Boletos</a>
         </nav>
       </div>
