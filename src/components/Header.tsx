@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 
-export const Header: React.FC = () => {
-
-  const scrollNav = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const seccionScroll = e.currentTarget.getAttribute("href");
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const seccion = document.querySelector(seccionScroll!);
-    seccion?.scrollIntoView({ behavior: "smooth" });
-  }
-
-  useEffect(() => {
-    function navegacionFija() {
-      const barra = document.querySelector('header');
-      const sobreFestival = document.querySelector('.sobre-festival');
-      const body = document.querySelector('body');   
+const Header = () => {
+  const navegacionFija = () => {
+    useEffect(() => {
+      const barra = document.querySelector('.header') as HTMLElement | null;
+      const sobreFestival = document.querySelector('.sobre-festival') as HTMLElement | null;
+      const body = document.querySelector('body') as HTMLElement | null;
 
       const handleScroll = () => {
-        if ( sobreFestival?.getBoundingClientRect().bottom < 0) {
+        if (sobreFestival?.getBoundingClientRect().bottom! < 0) {
           barra?.classList.add('fijo');
           body?.classList.add('body-scroll');
         } else {
@@ -31,20 +22,38 @@ export const Header: React.FC = () => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }
-    navegacionFija();
-  }, []);
+    }, []);
+  };
+
+  const scrollNav = () => {
+    const enlaces = document.querySelectorAll('.navegacion-principal');
+  
+    enlaces.forEach((enlace) => {
+      enlace.addEventListener('click', (e) => {
+        e.preventDefault();
+        const seccionScroll = (e.target as HTMLAnchorElement).getAttribute('href');
+        const seccion = document.querySelector(seccionScroll!);
+        seccion?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  };
+  
+
+  navegacionFija();
 
   return (
     <header className="header">
       <div className="contenedor contenido-header">
-        <h1>Rock &amp; EDM Fest</h1>
-        <nav className="navegacion-principal">
-          <a href="#lineup" onClick={scrollNav}>Line Up</a>
-          <a href="#galeria" onClick={scrollNav}>Galeria</a>
-          <a href="#boletos" onClick={scrollNav}>Boletos</a>
+        <h1>Rock & EDM Festival</h1>
+
+        <nav onClick={scrollNav} className="navegacion-principal">
+          <a href="#lineup">Line Up</a>
+          <a href="#galeria">GalerÃ­a</a>
+          <a href="#boletos">Boletos</a>
         </nav>
       </div>
     </header>
   );
-}
+};
+
+export default Header;
